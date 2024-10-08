@@ -8,6 +8,13 @@ public class PipelineStage : Stage
         /***********************************
          *    Instantiate the shared stack
          ***********************************/
-        new AirbnbSharedStack(this, "AirbnbSharedStack");
+        var sharedStack = new AirbnbSharedStack(this, "AirbnbSharedStack");
+        
+
+        new UserStacks(this, "UserStacks", new UserStackProps
+        {
+            AirbnbDatabase = sharedStack.AirbnbDB,
+            AirbnbGraphqlApi = sharedStack.AirbnbApi,
+        });
     }
 }

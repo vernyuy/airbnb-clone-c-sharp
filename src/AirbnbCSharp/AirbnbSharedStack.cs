@@ -7,16 +7,16 @@ using System.IO;
 
 public class AirbnbSharedStack : Stack
 {
-    public Table AcmsDatabase { get; private set; }
-    public GraphqlApi AcmsGraphqlApi { get; private set; }
-    public CfnGraphQLSchema ApiSchema { get; private set; }
+    public Table AirbnbDB { get; private set; }
+    public GraphqlApi AirbnbApi { get; private set; }
+    public CfnGraphQLSchema AirbnbApiSchema { get; private set; }
 
     public AirbnbSharedStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
     {
         // Example setup for Cognito User Pool and AppSync API (you can add your actual resources and logic here)
 
         // DynamoDB Table example setup
-        AcmsDatabase = new Table(this, "AirbnbDB", new TableProps
+        AirbnbDB = new Table(this, "AirbnbDB", new TableProps
         {
             PartitionKey = new Attribute
             {
@@ -28,7 +28,7 @@ public class AirbnbSharedStack : Stack
         });
 
         // AppSync GraphQL API setup example
-        AcmsGraphqlApi = new GraphqlApi(this, "AirbnbApi", new GraphqlApiProps
+        AirbnbApi = new GraphqlApi(this, "AirbnbApi", new GraphqlApiProps
         {
             Name = "AirbnbApi",
             Definition = Definition.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "graphql/schema.graphql")),
@@ -43,16 +43,16 @@ public class AirbnbSharedStack : Stack
         });
 
         // Define the GraphQL Schema for AppSync
-        ApiSchema = new CfnGraphQLSchema(this, "APISchema", new CfnGraphQLSchemaProps
+        AirbnbApiSchema = new CfnGraphQLSchema(this, "AirbnbApiSchema", new CfnGraphQLSchemaProps
         {
-            ApiId = AcmsGraphqlApi.ApiId,
+            ApiId = AirbnbApi.ApiId,
             Definition = File.ReadAllText("graphql/schema.graphql") // Assuming schema is in the graphql folder
         });
 
         // Example: Output the GraphQL API URL
         _ = new CfnOutput(this, "GraphQLAPIURL", new CfnOutputProps
         {
-            Value = AcmsGraphqlApi.GraphqlUrl
+            Value = AirbnbApi.GraphqlUrl
         });
     }
 }
