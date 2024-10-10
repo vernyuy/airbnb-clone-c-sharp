@@ -33,25 +33,25 @@ public class UserStacks : Stack
         });
 
         // // Get User Account Function
-        // var getUserAccount = new AppsyncFunction(this, "getUserAccount", new AppsyncFunctionProps
-        // {
-        //     Name = "getUserAccount",
-        //     Api = airbnbGraphqlApi,
-        //     DataSource = airbnbDataSource,
-        //     Code = Code.FromAsset(BundleAppSyncResolver("src/resolvers/user/getUserAccount.ts")),
-        //     Runtime = FunctionRuntime.JS_1_0_0
-        // });
+        var getUserAccount = new AppsyncFunction(this, "getUserAccount", new AppsyncFunctionProps
+        {
+            Name = "getUserAccount",
+            Api = airbnbGraphqlApi,
+            DataSource = airbnbDataSource,
+            Code = Code.FromAsset(BundleAppSyncResolver("resolvers/user/getUser.js")),
+            Runtime = FunctionRuntime.JS_1_0_0
+        });
 
         // // Get User Account Resolver
-        // new Resolver(this, "getUserAccountResolver", new ResolverProps
-        // {
-        //     Api = airbnbGraphqlApi,
-        //     TypeName = "Query",
-        //     FieldName = "getUserAccount",
-        //     Code = Code.FromAsset(Path.Combine(Directory.GetCurrentDirectory(), "./js_resolvers/_before_and_after_mapping_template.js")),
-        //     Runtime = FunctionRuntime.JS_1_0_0,
-        //     PipelineConfig = new[] { getUserAccount }
-        // });
+        new Resolver(this, "getUserAccountResolver", new ResolverProps
+        {
+            Api = airbnbGraphqlApi,
+            TypeName = "Query",
+            FieldName = "getUserAccount",
+            Code = Code.FromAsset(Path.Combine(Directory.GetCurrentDirectory(), "resolvers/default.js")),
+            Runtime = FunctionRuntime.JS_1_0_0,
+            PipelineConfig = new[] { getUserAccount }
+        });
 
         // Create User Resolver
         new Resolver(this, "createUserResolver", new ResolverProps
