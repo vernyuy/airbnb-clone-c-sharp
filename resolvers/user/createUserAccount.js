@@ -1,22 +1,26 @@
 import {  util } from '@aws-appsync/utils';
+import { put } from '@aws-appsync/utils/dynamodb';
 export function request(
   ctx
 ) {
-  const item = ctx.args.input;
+  const input = ctx.args.input;
   const id = util.autoId()
+  const item = {
+    id: id,
+    ENTITY: "USER",
+    ...input,
+    createdAt: util.time.nowISO8601(),
+    updatedAt: util.time.nowISO8601(),
+  }
+  const key = {
+    PK: "USER",
+    SK: `USER#${id}`,
+  }
 
-  return {
-    operation: 'PutItem',
-    attributeValues: util.dynamodb.toMapValues({
-      id: id,
-      ENTITY: "USER",
-      ...item,
-      PK: "USER",
-      SK: `USER#${id}`,
-      createdAt: util.time.nowISO8601(),
-      updatedAt: util.time.nowISO8601(),
-    }),
-  };
+  return put({
+    key: key,
+    item: item
+  })
 }
 
 export function response(

@@ -20,7 +20,11 @@ public class AirbnbSharedStack : Stack
         {
             PartitionKey = new Attribute
             {
-                Name = "ID",
+                Name = "PK",
+                Type = AttributeType.STRING
+            },
+            SortKey = new Attribute {
+                Name = "SK",
                 Type = AttributeType.STRING
             },
             BillingMode = BillingMode.PAY_PER_REQUEST,
