@@ -7,14 +7,14 @@ export function request(
 
   return {
     operation: 'PutItem',
-    key: util.dynamodb.toMapValues({
-      PK: "USER",
-      SK: `USER#${id}`
-    }),
     attributeValues: util.dynamodb.toMapValues({
       id: id,
       ENTITY: "USER",
       ...item,
+      PK: "USER",
+      SK: `USER#${id}`,
+      createdAt: util.time.nowISO8601(),
+      updatedAt: util.time.nowISO8601(),
     }),
   };
 }
