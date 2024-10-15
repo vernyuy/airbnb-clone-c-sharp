@@ -20,7 +20,7 @@ public class BuildingStacks: Stack
 
         // Add the DynamoDB DataSource
         var airbnbDataSource = airbnbGraphqlApi.AddDynamoDbDataSource(
-            "airbnbdbs", airbnbDatabase
+            "airbnbdbs-", airbnbDatabase
         );
 
          // Create User Account Function
