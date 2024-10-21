@@ -9,7 +9,8 @@ public class PipelineStage : Stage
          *    Instantiate the shared stack
          ***********************************/
         var sharedStack = new AirbnbSharedStack(this, "AirbnbSharedStack");
-        
+
+        new BuildingStacks(this, "BuildingStacks", sharedStack.AirbnbDB, sharedStack.AirbnbApi);
 
         new UserStacks(this, "UserStacks", new UserStackProps
         {
@@ -17,16 +18,7 @@ public class PipelineStage : Stage
             AirbnbGraphqlApi = sharedStack.AirbnbApi,
         });
 
-        new BuildingStacks(this, "BuildingStacks", new BuildingStackProps
-        {
-            AirbnbDatabase = sharedStack.AirbnbDB,
-            AirbnbGraphqlApi = sharedStack.AirbnbApi,
-        });
-
-        new ApartmentStacks(this, "ApartmentStacks", new ApartmentStacksProps
-        {
-            AirbnbDatabase = sharedStack.AirbnbDB,
-            AirbnbGraphqlApi = sharedStack.AirbnbApi,
-        });
+        _ = new ApartmentStacks(this, "ApartmentStacks", sharedStack.AirbnbDB, sharedStack.AirbnbApi);
+        _ = new BookingStack(this, "BookingStacks", sharedStack.AirbnbDB, sharedStack.AirbnbApi);
     }
 }

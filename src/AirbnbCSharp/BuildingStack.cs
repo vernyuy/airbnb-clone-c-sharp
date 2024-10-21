@@ -7,20 +7,33 @@ using System.IO;
 
 public class BuildingStackProps
 {
-    public GraphqlApi AirbnbGraphqlApi { get; set; }
-    public Table AirbnbDatabase { get; set; }
+    // public GraphqlApi AirbnbGraphqlApi { get; set; }
+    // public Table AirbnbDatabase { get; set; }
 }
 
 public class BuildingStacks: Stack
 {
-    public BuildingStacks(Construct scope, string id, BuildingStackProps props){
+    private PipelineStage pipelineStage;
+    private string v;
+    private Table airbnbDB;
+    private GraphqlApi airbnbApi;
+
+    public BuildingStacks(PipelineStage pipelineStage, string v, Table airbnbDB, GraphqlApi airbnbApi)
+    {
+        this.pipelineStage = pipelineStage;
+        this.v = v;
+        this.airbnbDB = airbnbDB;
+        this.airbnbApi = airbnbApi;
+    }
+
+    public BuildingStacks(Construct scope, string id, BuildingStackProps props, GraphqlApi AirbnbGraphqlApi, Table AirbnbDatabase){
         
-        var airbnbGraphqlApi = props.AirbnbGraphqlApi;
-        var airbnbDatabase = props.AirbnbDatabase;
+        var airbnbGraphqlApi = AirbnbGraphqlApi;
+        var airbnbDatabase = AirbnbDatabase;
 
         // Add the DynamoDB DataSource
         var airbnbDataSource = airbnbGraphqlApi.AddDynamoDbDataSource(
-            "airbnbdbs-", airbnbDatabase
+            "airbnbdbs", airbnbDatabase
         );
 
          // Create User Account Function
