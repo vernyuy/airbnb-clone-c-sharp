@@ -19,7 +19,7 @@ public class BuildingStacks : Stack
 
         // Add the DynamoDB DataSource
         var airbnbDataSource = airbnbGraphqlApi.AddDynamoDbDataSource(
-            "airbnbdbsrc", airbnbDatabase
+            "building-ds", airbnbDatabase
         );
 
          // Create User Account Function
@@ -42,12 +42,5 @@ public class BuildingStacks : Stack
             Runtime = FunctionRuntime.JS_1_0_0,
             PipelineConfig = new[] { createBuildingFunction }
         });
-    }
-
-    // Helper function to bundle AppSync resolver files
-    private static string BundleAppSyncResolver(string path)
-    {
-        // Implement your bundling logic or resolve the absolute path for the resolver file
-        return Path.Combine(Directory.GetCurrentDirectory(), path);
     }
 }
