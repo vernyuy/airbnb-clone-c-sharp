@@ -22,7 +22,7 @@ public class PipelineStage : Stage
             AirbnbGraphqlApi = sharedStack.AirbnbApi,
         });
 
-        new ApartmentStacks(this, "ApartmentStacks", new ApartmentStacksProps{
+        new ApartmentStacks(this, "ApartmentStacks", new ApartmentStackProps{
             AirbnbDatabase = sharedStack.AirbnbDB,
             AirbnbGraphqlApi = sharedStack.AirbnbApi,
         });

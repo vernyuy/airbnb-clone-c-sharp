@@ -12,7 +12,7 @@ public class ApartmentStackProps : StackProps
 
 public class ApartmentStacks : Stack
 {
-    public UserStacks(Construct scope, string id, ApartmentStackProps props) : base(scope, id, props)
+    public ApartmentStacks(Construct scope, string id, ApartmentStackProps props) : base(scope, id, props)
     {
         var airbnbGraphqlApi = props.AirbnbGraphqlApi;
         var airbnbDatabase = props.AirbnbDatabase;
