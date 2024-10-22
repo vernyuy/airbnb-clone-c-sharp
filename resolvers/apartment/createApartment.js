@@ -7,7 +7,7 @@ export function request(
   const id = util.autoId()
   const item = {
     id: id,
-    GSI2PK: `USER#${item.userId}`,
+    GSI2PK: `USER#${input.userId}`,
     GSI2SK: `BUILDING#${id}`,
     ENTITY: "APARTMENT",
     ...input,
