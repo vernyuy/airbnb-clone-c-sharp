@@ -172,18 +172,18 @@ public class BookingStack : Stack
         var lambdaDs = airbnbGraphqlApi.AddLambdaDataSource("lambdaDatasource", lambdaFn);
 
         // Adding SQS event source to sqsConsumer Lambda
-        // var eventSource = new SqsEventSource(queue);
-        // sqsConsumer.AddEventSource(eventSource);
+        var eventSource = new SqsEventSource(queue);
+        sqsConsumer.AddEventSource(eventSource);
 
-        // // Creating AppSync resolver
-        // lambdaDs.CreateResolver("booking-resolver", new ResolverProps
-        // {
-        //     TypeName = "Mutation",
-        //     FieldName = "createApartmentBooking"
-        // });
+        // Creating AppSync resolver
+        lambdaDs.CreateResolver("booking-resolver", new ResolverProps
+        {
+            TypeName = "Mutation",
+            FieldName = "createApartmentBooking"
+        });
 
-        // // Permissions for Lambda to interact with SQS
-        // queue.GrantSendMessages(lambdaFn);
-        // queue.GrantConsumeMessages(sqsConsumer);
+        // Permissions for Lambda to interact with SQS
+        queue.GrantSendMessages(lambdaFn);
+        queue.GrantConsumeMessages(sqsConsumer);
     }
 }
