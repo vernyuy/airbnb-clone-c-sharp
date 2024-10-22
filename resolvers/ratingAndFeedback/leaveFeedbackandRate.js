@@ -13,7 +13,7 @@ export function request(
     updatedAt: util.time.nowISO8601(),
   }
   const key = {
-    PK: `APARTMENT#${id}`,
+    PK: `APARTMENT#${input.apartmentId}`,
     PK: `FEEDBACK#${util.autoId()}`,
   }
 
