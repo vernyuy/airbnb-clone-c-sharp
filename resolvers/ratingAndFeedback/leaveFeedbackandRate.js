@@ -14,7 +14,7 @@ export function request(
   }
   const key = {
     PK: `APARTMENT#${input.apartmentId}`,
-    PK: `FEEDBACK#${util.autoId()}`,
+    PK: `FEEDBACK#${id}`,
   }
 
   return put({
