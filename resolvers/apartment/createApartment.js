@@ -3,9 +3,6 @@ import { put } from "@aws-appsync/utils/dynamodb";
 export function request(ctx) {
   const input = ctx.args.input;
   const id = util.autoId();
-  if (!input.userId) {
-    throw new Error("buildingId is required.");
-  }
   const item = {
     id: id,
     GSI2PK: `USER#${input.userId}`,
