@@ -1,10 +1,11 @@
-import {  util } from '@aws-appsync/utils';
-import { put } from '@aws-appsync/utils/dynamodb';
-export function request(
-  ctx
-) {
+import { util } from "@aws-appsync/utils";
+import { put } from "@aws-appsync/utils/dynamodb";
+export function request(ctx) {
   const input = ctx.args.input;
-  const id = util.autoId()
+  const id = util.autoId();
+  if (!input.userId) {
+    throw new Error("buildingId is required.");
+  }
   const item = {
     id: id,
     GSI2PK: `USER#${input.userId}`,
@@ -13,20 +14,18 @@ export function request(
     ...input,
     createdAt: util.time.nowISO8601(),
     updatedAt: util.time.nowISO8601(),
-  }
+  };
   const key = {
     PK: "BUILDING",
     SK: `APARTMENT#${id}`,
-  }
+  };
 
   return put({
     key: key,
-    item: item
-  })
+    item: item,
+  });
 }
 
-export function response(
-  ctx
-) {
+export function response(ctx) {
   return ctx.result;
 }

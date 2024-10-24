@@ -13,7 +13,7 @@ public class SharedStack : Stack
 
     public SharedStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
     {
- var userPool = new UserPool(this, "ACMSCognitoUserPool", new UserPoolProps
+        var userPool = new UserPool(this, "ACMSCognitoUserPool", new UserPoolProps
         {
             SelfSignUpEnabled = true,
             AccountRecovery = AccountRecovery.PHONE_AND_EMAIL,
@@ -121,13 +121,21 @@ public class SharedStack : Stack
 
         new CfnOutput(this, "GraphQLAPI ID", new CfnOutputProps
         {
-            Value = this.AirbnbApi.ApiId
+            Value = this.AirbnbApi.ApiId,
+            ExportName = "ApiID"
         });
 
         new CfnOutput(this, "GraphQLAPI URL", new CfnOutputProps
         {
-            Value = this.AirbnbApi.GraphqlUrl
+            Value = this.AirbnbApi.GraphqlUrl,
+            ExportName = "ApiUrl"
         });
+
+        new CfnOutput(this, "DynamoDBTableName", new CfnOutputProps
+            {
+                Value = this.AirbnbDB.TableName,
+                ExportName = "DynamoDBTableName"
+            });
       
     }
 }

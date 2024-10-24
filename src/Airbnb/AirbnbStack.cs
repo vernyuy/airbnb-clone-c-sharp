@@ -26,10 +26,10 @@ namespace Airbnb
             StageName = "dev"
         }));
 
-        var prodStage = pipeline.AddStage(new PipelineStage(this, "AirbnbPipelineProdStage", new StageProps
-        {
-            StageName = "prod"
-        }));
+        // var prodStage = pipeline.AddStage(new PipelineStage(this, "AirbnbPipelineProdStage", new StageProps
+        // {
+        //     StageName = "prod"
+        // }));
 
         devStage.AddPost(new ManualApprovalStep("Manual approval before production"));
         }

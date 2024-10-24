@@ -27,15 +27,12 @@ public class PipelineStage : Stage
             AirbnbGraphqlApi = sharedStack.AirbnbApi,
         });
 
-        var bs = new BookingStack(this, "BookingStack", new BookingStackProps{
-            AirbnbDatabase = sharedStack.AirbnbDB,
-            AirbnbGraphqlApi = sharedStack.AirbnbApi,
-        });
+        var bs = new BookingStack(this, "BookingStack");
 
         new RatingsAndFeedbackStack(this, "RatingsAndFeedbackStack", new RatingsAndFeedbackStackProps
         {
-            AcmsDatabase = sharedStack.AirbnbDB,
             AcmsGraphqlApi = sharedStack.AirbnbApi,
+            AcmsDatabase = sharedStack.AirbnbDB,
         });
 
         // new ApartmentStacks(this, "ApartmentStacks", new ApartmentStacksProps
@@ -45,5 +42,6 @@ public class PipelineStage : Stage
         // });
 
         // sharedStack.AddDependency(bs);
+        // bs.AddDependency(sharedStack);
     }
 }
