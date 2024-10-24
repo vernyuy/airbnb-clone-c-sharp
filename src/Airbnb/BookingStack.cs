@@ -21,8 +21,6 @@ public class BookingStack : Stack
                 // If you need the table ARN or other attributes, you can set them here.
             });
 
-
-
         // Dead Letter Queue
         var dlq = new Queue(this, "DeadLetterQueue");
 
@@ -41,8 +39,6 @@ public class BookingStack : Stack
         {
             AssumedBy = new ServicePrincipal("lambda.amazonaws.com")
         });
-
-
 
         lambdaRole.AddManagedPolicy(ManagedPolicy.FromAwsManagedPolicyName("service-role/AWSLambdaBasicExecutionRole"));
 
