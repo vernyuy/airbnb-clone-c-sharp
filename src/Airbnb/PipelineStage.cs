@@ -27,7 +27,7 @@ public class PipelineStage : Stage
             AirbnbGraphqlApi = sharedStack.AirbnbApi,
         });
 
-        var bs = new BookingStack(this, "BookingStack");
+        new BookingStack(this, "BookingStack");
 
         new RatingsAndFeedbackStack(this, "RatingsAndFeedbackStack", new RatingsAndFeedbackStackProps
         {

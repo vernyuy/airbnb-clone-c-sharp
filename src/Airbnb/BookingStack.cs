@@ -18,7 +18,6 @@ public class BookingStack : Stack
             var airbnbDatabase = Table.FromTableAttributes(this, "ImportedTable", new TableAttributes
             {
                 TableName = tableName,
-                // If you need the table ARN or other attributes, you can set them here.
             });
 
         // Dead Letter Queue
